@@ -2,6 +2,8 @@
 
 > Ultra-refined, distraction-free floating island dock on a minimal canvas with real-time Dubai clock, magnetic sliding tab capsule, and dark/light mode.
 
+![Cover Preview](cover.png)
+
 [![Live Demo](https://img.shields.io/badge/Live_Demo-Visit_Website-0066cc?style=for-the-badge&logo=googlechrome&logoColor=white)](https://IBahaaaldin.github.io/navbar-floating-island/)
 [![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-Active-success?style=for-the-badge&logo=github)](https://IBahaaaldin.github.io/navbar-floating-island/)
 
@@ -9,9 +11,9 @@
 
 ## 🌐 Visual Previews
 
-| Desktop Showcase (1200x900) | Mobile Showcase (390x844) |
-| :---: | :---: |
-| ![Desktop Preview](screenshot-desktop.png) | <img src="screenshot-mobile.png" width="300" alt="Mobile Preview" /> |
+| Desktop Showcase (1200x900) | Mobile Showcase (390x844) | Instagram Cover (1080x1080) |
+| :---: | :---: | :---: |
+| ![Desktop Preview](screenshot-desktop.png) | <img src="screenshot-mobile.png" width="220" alt="Mobile Preview" /> | <img src="cover-instagram.png" width="220" alt="Instagram Cover" /> |
 
 *(Includes full interaction videos: `video-desktop.mp4` and `video-mobile.mp4`)*
 
@@ -20,7 +22,7 @@
 ## ✨ Features & Micro-Interactions
 
 - **Clean Minimal Canvas**: Pure black (`#000000`) or pure crisp white (`#ffffff`) canvas with zero clutter.
-- **Dead-Center Ergonomics**: Placed dead-center both horizontally and vertically across desktop and mobile.
+- **Dead-Center Ergonomics**: Placed dead-center both horizontally and vertically across desktop and mobile screens.
 - **Specular Liquid Glass**: Dual-layer backdrop blur with 190% saturation and inset specular highlights.
 - **Magnetic Sliding Capsule**: Physics-based hover pill that smoothly glides behind navigation tabs.
 - **Live Dubai Clock**: Real-time ticking Dubai time pill (`DXB 10:15 AM`) with pulsing green status dot.
@@ -35,6 +37,8 @@
 
 ```text
 ├── index.html              # Standalone production navbar component
+├── cover.png               # Widescreen cover banner (1280x640)
+├── cover-instagram.png     # Square cover for Instagram (@ibahaaaldincoding) (1080x1080)
 ├── screenshot-desktop.png  # Desktop visual preview (1200x900)
 ├── video-desktop.mp4       # Desktop interaction recording (MP4)
 ├── screenshot-mobile.png   # Mobile visual preview (390x844)
@@ -49,10 +53,8 @@
 ## 🚀 Quick Start
 
 ### 1. View Locally
-Simply clone and open `index.html` in your browser:
+Simply open `index.html` in your browser:
 ```bash
-git clone https://github.com/IBahaaaldin/navbar-floating-island.git
-cd navbar-floating-island
 open index.html
 ```
 
