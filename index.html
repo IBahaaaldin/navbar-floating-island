@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liquid Glass Island Navbar — Ready-UIs</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Smooth global theme transition */
+    html, body {
+      transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                  color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Dark Mode Liquid Glass */
+    .dark .liquid-glass {
+      background: rgba(14, 16, 22, 0.85);
+      backdrop-filter: blur(28px) saturate(190%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 30px 70px -20px rgba(0, 0, 0, 0.85),
+                  0 0 0 1px rgba(255, 255, 255, 0.05),
+                  inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+    }
+
+    /* Light Mode Liquid Glass */
+    .liquid-glass {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(28px) saturate(190%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.12),
+                  0 0 0 1px rgba(0, 0, 0, 0.04),
+                  inset 0 1px 0 0 rgba(255, 255, 255, 1);
+    }
+
+    /* Magnetic Tab Indicator */
+    #navIndicator {
+      transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1),
+                  width 0.26s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.2s ease;
+    }
+
+    /* Prevent text wrapping across entire navbar */
+    .no-wrap {
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body class="bg-[#000000] dark:bg-[#000000] text-slate-800 dark:text-slate-100 min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 selection:bg-indigo-500/30 selection:text-white">
+
+  <!-- ======================================================== -->
+  <!-- CENTERED LIQUID GLASS DOCK NAVBAR -->
+  <!-- ======================================================== -->
+  <div class="relative z-50 flex flex-col items-center w-full max-w-sm sm:max-w-none">
+    
+    <!-- Main Floating Bar -->
+    <nav class="liquid-glass rounded-full p-2 sm:px-3 sm:py-2 flex items-center justify-between sm:justify-start gap-2 sm:gap-3 shadow-2xl relative select-none w-full sm:w-auto">
+      
+      <!-- Brand Avatar + Monogram -->
+      <a href="#home" class="flex items-center gap-2.5 pl-1 pr-1.5 sm:pr-2 py-0.5 rounded-full group focus:outline-none">
+        <div class="relative w-9 h-9 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-600 p-[1.5px] flex items-center justify-center shadow-lg shadow-indigo-500/25 group-hover:scale-105 transition-transform flex-shrink-0">
+          <div class="w-full h-full bg-neutral-900 rounded-full flex items-center justify-center text-xs font-bold text-white">
+            BA
+          </div>
+          <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-black"></span>
+        </div>
+        <div class="flex flex-col text-left leading-tight no-wrap">
+          <span class="text-xs font-semibold text-neutral-900 dark:text-white tracking-tight no-wrap">Bahaa Aldin</span>
+          <span class="text-[10px] text-neutral-500 dark:text-neutral-400 font-medium no-wrap">Creative Developer</span>
+        </div>
+      </a>
+
+      <!-- Desktop Divider -->
+      <div class="hidden sm:block h-6 w-[1px] bg-neutral-200 dark:bg-neutral-800 flex-shrink-0"></div>
+
+      <!-- Live Dubai Clock Pill (Desktop) -->
+      <div class="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-neutral-100 dark:bg-white/[0.06] text-neutral-600 dark:text-neutral-300 text-[10px] font-mono border border-neutral-200 dark:border-white/5 no-wrap flex-shrink-0">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span id="liveClock">DXB 10:15 AM</span>
+      </div>
+
+      <!-- Desktop Navigation Tabs -->
+      <div id="navContainer" class="relative hidden sm:flex items-center gap-0.5">
+        <div id="navIndicator" class="absolute top-0 bottom-0 left-0 rounded-full bg-neutral-900/[0.08] dark:bg-white/[0.1] opacity-0 pointer-events-none"></div>
+
+        <button type="button" class="tab-btn px-3 py-1.5 rounded-full text-xs font-medium text-neutral-600 dark:text-neutral-300 hover:text-neutral-950 dark:hover:text-white focus:outline-none no-wrap">
+          Work
+        </button>
+        <button type="button" class="tab-btn px-3 py-1.5 rounded-full text-xs font-medium text-neutral-600 dark:text-neutral-300 hover:text-neutral-950 dark:hover:text-white focus:outline-none no-wrap">
+          Projects
+        </button>
+        <button type="button" class="tab-btn px-3 py-1.5 rounded-full text-xs font-medium text-neutral-600 dark:text-neutral-300 hover:text-neutral-950 dark:hover:text-white focus:outline-none no-wrap">
+          Stack
+        </button>
+        <button type="button" class="tab-btn px-3 py-1.5 rounded-full text-xs font-medium text-neutral-600 dark:text-neutral-300 hover:text-neutral-950 dark:hover:text-white focus:outline-none no-wrap">
+          Writing
+        </button>
+      </div>
+
+      <!-- Desktop Divider -->
+      <div class="hidden sm:block h-6 w-[1px] bg-neutral-200 dark:bg-neutral-800 flex-shrink-0"></div>
+
+      <!-- Controls: Theme Toggle + Socials + CTA Button -->
+      <div class="flex items-center gap-1.5 flex-shrink-0">
+        
+        <!-- Theme Toggle -->
+        <button id="themeToggleBtn" 
+                type="button" 
+                aria-label="Toggle Color Theme"
+                class="w-8 h-8 rounded-full flex items-center justify-center text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800/80 active:scale-90 transition-all focus:outline-none flex-shrink-0">
+          <svg id="sunIcon" class="w-4 h-4 fill-none stroke-current stroke-2 hidden dark:block" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          <svg id="moonIcon" class="w-4 h-4 fill-none stroke-current stroke-2 block dark:hidden" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+
+        <!-- GitHub Profile (Desktop) -->
+        <a href="https://github.com/IBahaaaldin" target="_blank" rel="noopener noreferrer" 
+           aria-label="GitHub Profile"
+           class="hidden sm:flex w-8 h-8 rounded-full items-center justify-center text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800/80 active:scale-90 transition-all flex-shrink-0">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+        </a>
+
+        <!-- High-Contrast CTA Button (Desktop, NO WRAP) -->
+        <a href="mailto:bahaam.coding@gmail.com" 
+           class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold text-neutral-900 dark:text-neutral-900 bg-white hover:bg-neutral-100 shadow-sm active:scale-95 transition-all no-wrap flex-shrink-0">
+          <span class="no-wrap">Let's Talk</span>
+          <svg class="w-3.5 h-3.5 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+
+        <!-- Mobile Hamburger Button -->
+        <button id="mobileMenuBtn" 
+                type="button" 
+                aria-label="Toggle Mobile Navigation" 
+                class="sm:hidden w-8 h-8 rounded-full flex items-center justify-center text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none transition-colors flex-shrink-0">
+          <svg id="hamburgerIcon" class="w-4 h-4 stroke-current stroke-2 fill-none transition-transform duration-200" viewBox="0 0 24 24">
+            <line id="hLine1" x1="4" x2="20" y1="7" y2="7" class="transition-all duration-200 origin-center"/>
+            <line id="hLine2" x1="4" x2="20" y1="12" y2="12" class="transition-opacity duration-200"/>
+            <line id="hLine3" x1="4" x2="20" y1="17" y2="17" class="transition-all duration-200 origin-center"/>
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Centered Mobile Drawer Card (Zero Text Wrapping) -->
+    <div id="mobileDropdown" class="sm:hidden w-full mt-2.5 liquid-glass rounded-3xl p-4 hidden flex-col gap-3 shadow-2xl transition-all duration-300">
+      
+      <!-- Live Mobile Status -->
+      <div class="flex items-center justify-between p-2.5 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-400 no-wrap">
+        <div class="flex items-center gap-2 no-wrap">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="text-xs font-semibold no-wrap">Available for Work</span>
+        </div>
+        <span class="text-[10px] font-mono no-wrap" id="mobileLiveClock">10:15 AM</span>
+      </div>
+
+      <!-- Navigation Links (One Row per Item) -->
+      <div class="flex flex-col gap-1 border-t border-neutral-200 dark:border-neutral-800 pt-2">
+        <a href="#work" class="flex items-center justify-between p-2 rounded-2xl text-xs font-semibold text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-white/[0.08] transition-colors no-wrap">
+          <div class="flex items-center gap-2.5 no-wrap">
+            <span class="w-6 h-6 rounded-lg bg-indigo-500/10 text-indigo-500 flex items-center justify-center text-xs">💼</span>
+            <span class="no-wrap">Selected Works</span>
+          </div>
+          <svg class="w-3.5 h-3.5 text-neutral-400 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+
+        <a href="#projects" class="flex items-center justify-between p-2 rounded-2xl text-xs font-semibold text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-white/[0.08] transition-colors no-wrap">
+          <div class="flex items-center gap-2.5 no-wrap">
+            <span class="w-6 h-6 rounded-lg bg-purple-500/10 text-purple-500 flex items-center justify-center text-xs">🚀</span>
+            <span class="no-wrap">All Projects &amp; Apps</span>
+          </div>
+          <svg class="w-3.5 h-3.5 text-neutral-400 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+
+        <a href="#stack" class="flex items-center justify-between p-2 rounded-2xl text-xs font-semibold text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-white/[0.08] transition-colors no-wrap">
+          <div class="flex items-center gap-2.5 no-wrap">
+            <span class="w-6 h-6 rounded-lg bg-cyan-500/10 text-cyan-500 flex items-center justify-center text-xs">⚡</span>
+            <span class="no-wrap">Tech Stack &amp; Skills</span>
+          </div>
+          <svg class="w-3.5 h-3.5 text-neutral-400 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+
+        <a href="#writing" class="flex items-center justify-between p-2 rounded-2xl text-xs font-semibold text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-white/[0.08] transition-colors no-wrap">
+          <div class="flex items-center gap-2.5 no-wrap">
+            <span class="w-6 h-6 rounded-lg bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-xs">✍️</span>
+            <span class="no-wrap">Articles &amp; Architecture</span>
+          </div>
+          <svg class="w-3.5 h-3.5 text-neutral-400 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+      </div>
+
+      <!-- Socials & Full Width CTA (Never Wraps) -->
+      <div class="pt-2 border-t border-neutral-200 dark:border-neutral-800 flex flex-col gap-2.5">
+        <div class="flex items-center justify-between px-1">
+          <span class="text-[11px] text-neutral-500 dark:text-neutral-400 font-medium no-wrap">Connect</span>
+          <div class="flex items-center gap-1.5">
+            <a href="https://github.com/IBahaaaldin" target="_blank" class="p-2 rounded-xl text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-white/[0.08]">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/bahaa-mohammed-371259369" target="_blank" class="p-2 rounded-xl text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-white/[0.08]">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.64 1.64 0 1 0 0-3.28 1.64 1.64 0 0 0 0 3.28m1.4 10.74v-8.37H5.06v8.37h2.8z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/ibahaaaldincoding" target="_blank" class="p-2 rounded-xl text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-white/[0.08]">
+              <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <a href="mailto:bahaam.coding@gmail.com" class="w-full py-2.5 px-4 rounded-2xl text-xs font-semibold text-center text-white bg-gradient-to-r from-indigo-500 to-purple-600 shadow-md shadow-indigo-500/20 active:scale-[0.98] transition-all flex items-center justify-center gap-2 no-wrap">
+          <span class="no-wrap">Let's Talk</span>
+          <svg class="w-3.5 h-3.5 stroke-current stroke-2 fill-none flex-shrink-0" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- JAVASCRIPT: MAGNETIC TABS, LIVE CLOCK & THEME SWITCHER -->
+  <!-- ======================================================== -->
+  <script>
+    // 1. Sliding Magnetic Indicator
+    const navContainer = document.getElementById('navContainer');
+    const indicator = document.getElementById('navIndicator');
+    const tabs = navContainer ? navContainer.querySelectorAll('.tab-btn') : [];
+
+    tabs.forEach(tab => {
+      tab.addEventListener('mouseenter', () => {
+        const rect = tab.getBoundingClientRect();
+        const parentRect = navContainer.getBoundingClientRect();
+        indicator.style.opacity = '1';
+        indicator.style.width = `${rect.width}px`;
+        indicator.style.transform = `translateX(${rect.left - parentRect.left}px)`;
+      });
+
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('font-semibold', 'text-neutral-950', 'dark:text-white'));
+        tab.classList.add('font-semibold', 'text-neutral-950', 'dark:text-white');
+      });
+    });
+
+    if (navContainer) {
+      navContainer.addEventListener('mouseleave', () => {
+        indicator.style.opacity = '0';
+      });
+    }
+
+    // 2. Real-Time Dubai Ticking Clock (DXB GMT+4)
+    function updateClock() {
+      const now = new Date();
+      const options = { timeZone: 'Asia/Dubai', hour: '2-digit', minute: '2-digit', hour12: true };
+      const timeStr = now.toLocaleTimeString('en-US', options);
+      const clockEl = document.getElementById('liveClock');
+      const mobileClockEl = document.getElementById('mobileLiveClock');
+      if (clockEl) clockEl.textContent = `DXB ${timeStr}`;
+      if (mobileClockEl) mobileClockEl.textContent = timeStr;
+    }
+    updateClock();
+    setInterval(updateClock, 30000);
+
+    // 3. Theme Toggle
+    const html = document.documentElement;
+    const body = document.body;
+    const themeBtn = document.getElementById('themeToggleBtn');
+
+    themeBtn.addEventListener('click', () => {
+      html.classList.toggle('dark');
+      const isDark = html.classList.contains('dark');
+      body.style.backgroundColor = isDark ? '#000000' : '#ffffff';
+
+      themeBtn.style.transform = 'rotate(180deg)';
+      setTimeout(() => {
+        themeBtn.style.transform = 'none';
+      }, 300);
+    });
+
+    // 4. Mobile Menu Toggle
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const mobileDropdown = document.getElementById('mobileDropdown');
+    const hLine1 = document.getElementById('hLine1');
+    const hLine2 = document.getElementById('hLine2');
+    const hLine3 = document.getElementById('hLine3');
+
+    if (mobileBtn && mobileDropdown) {
+      mobileBtn.addEventListener('click', () => {
+        mobileDropdown.classList.toggle('hidden');
+        mobileDropdown.classList.toggle('flex');
+        const isOpen = !mobileDropdown.classList.contains('hidden');
+        if (isOpen) {
+          hLine1.setAttribute('transform', 'rotate(45 12 12) translate(0, 5)');
+          hLine2.style.opacity = '0';
+          hLine3.setAttribute('transform', 'rotate(-45 12 12) translate(0, -5)');
+        } else {
+          hLine1.removeAttribute('transform');
+          hLine2.style.opacity = '1';
+          hLine3.removeAttribute('transform');
+        }
+      });
+    }
+  </script>
+</body>
+</html>
